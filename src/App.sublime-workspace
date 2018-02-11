@@ -1,0 +1,257 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"User",
+				"UsersView\tclass"
+			],
+			[
+				"U",
+				"UsersView\tclass"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"borde",
+				"border-bottom"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"border-image",
+				"border-image-slice"
+			],
+			[
+				"border-s",
+				"border-style"
+			],
+			[
+				"background-c",
+				"background-color"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"tex",
+				"text-align"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 260.0,
+		"last_filter": "Package Control: ins",
+		"selected_items":
+		[
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"paka",
+				"Install Package Control"
+			]
+		],
+		"width": 549.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/config/urls.py",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/apps/users/admin.py",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/apps/users/urls.py",
+		"/home/marc/.config/sublime-text-3/Packages/Djaneiro/Settings/Python (Django).sublime-settings",
+		"/home/marc/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/config/settings/base.py",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/config/settings/local.py",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/.gitignore",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/config/settings/production.py",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/manage.py",
+		"/home/marc/Documents/Code/Python/Web/PiggyBank/project/config/settings/__init__.py",
+		"/home/marc/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/marc/.config/sublime-text-3/Packages/User/Python.sublime-settings",
+		"/home/marc/Documents/Code/Python/Web/GForum/project/templates/snippets/nav.html",
+		"/home/marc/Documents/Code/Python/Web/GForum/project/static/css/base.css",
+		"/home/marc/Documents/Code/Python/Web/GForum/project/templates/forum/forum_list.html",
+		"/home/marc/Documents/Code/Python/Web/GForum/project/templates/snippets/base.html"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 65.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "App.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 245.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
