@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
-import './App.css';
-import axios from "axios";
+import React from "react";
+import { Route } from "react-router-dom";
+import "./App.css";
+import LandingPage from "./components/pages/LandingPage";
 
-class App extends Component {
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: []
     };
   }
 
-  componentWillMount() {
-      axios.get("/api/users/").then( ( response ) => {
-        this.setState({ "users": response.data });
-      }).catch( err => console.log(err) );
-    }
-
   render() {
-    console.log(this.state)
     return (
 
       <div className="App">
-        {this.state.users.map((user, index) =>
-          <div key={index}>{user.name}</div>
-          )}
+				<Route
+					location={this.props.location}
+					path="/"
+					exact component={ LandingPage }
+				/>
       </div>
 
     );
