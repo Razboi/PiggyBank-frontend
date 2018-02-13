@@ -62,9 +62,12 @@ const LoginForm = styled( Form )`
 	flex-direction: column;
 	justify-content: center;
   align-items: center;
-	@media (max-height: 800px) {
+	@media (max-height: 800px) and (min-height: 631px) {
 		position: absolute !important;
 		bottom: 20%;
+	}
+	@media (max-height: 630px) {
+		height: 100%;
 	}
 `;
 
@@ -111,7 +114,10 @@ const InputWrapper = styled.div`
 
 const LoginInput = styled( Form.Input )`
 	width: 80%;
-	margin: 37px auto 0 auto !important;
+	margin: 36px auto 0 auto !important;
+	@media (min-height: 900px) {
+		margin: 54px auto 0 auto !important;
+	}
 	.ui.input input {
 		text-align: center;
 		border: none !important;
@@ -130,6 +136,9 @@ const LoginButton = styled( Form.Button )`
 	width: 80% !important;
 	max-width: 272px !important;
 	margin: 36px 0 !important;
+	@media (min-height: 900px) {
+		margin: 54px 0 !important;
+	}
 	.ui.button {
 		width: 100% !important;
 		margin: 0px !important;
@@ -168,6 +177,9 @@ const Logo = styled( Image )`
 	z-index: 3;
 	width: 85px;
 	height: auto;
+	@media (max-height: 630px) {
+		visibility: hidden;
+	}
 	@media (min-height: 1000px) {
 		top: 15%;
 	}
