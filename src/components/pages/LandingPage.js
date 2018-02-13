@@ -4,6 +4,7 @@ import { Form, Image, Icon } from "semantic-ui-react";
 import background from "../../images/back3.jpeg";
 
 const LandingWrapper = styled.div`
+	font-family: 'Ubuntu', sans-serif !important;
 	height: 100vh;
 	display: flex;
   justify-content: center;
@@ -34,6 +35,7 @@ const BackgroundOverlay = styled.div`
 	@media (min-width: 1000px) {
 		width: 66.666%;
 		right: 0px;
+		background-color: rgba(0, 0, 0, 0.55);
 	}
 `;
 
@@ -47,7 +49,7 @@ const FormWrapper = styled.div`
 	@media (min-width: 1000px) {
 		width: 33.333%;
 		left: 0px;
-		background-color: #fafafb;
+		background-color: #fff;
 	}
 `;
 
@@ -85,14 +87,26 @@ const TextWrapper = styled.div`
 const MainText = styled.span`
 	color: #fff;
 	z-index: 3;
-	font-size: 35px;
+	font-size: 38px;
 `;
 
 const SecondaryText = styled.span`
 	color: #fff;
 	z-index: 3;
-	font-size: 17px;
-	margin-top: 35px;
+	font-size: 19px;
+	margin-top: 2em;
+	font-style: italic;
+`;
+
+const InputWrapper = styled.div`
+	position: relative;
+	width: 100%;
+	max-width: 272px !important;
+	border-bottom: 1px solid !important;
+	border-color: #fff !important;
+	@media (min-width: 1000px) {
+		border-color: #262B30 !important;
+	}
 `;
 
 const LoginInput = styled( Form.Input )`
@@ -100,12 +114,10 @@ const LoginInput = styled( Form.Input )`
 	margin: 37px auto 0 auto !important;
 	.ui.input input {
 		text-align: center;
-		border-width: 0px 0px 1px 0px !important;
-		border-color: #fff !important;
+		border: none !important;
 		color: #fff !important;
 		@media (min-width: 1000px) {
-			border-color: #000 !important;
-			color: #000 !important;
+			color: #262B30 !important;
 		}
 	};
 	input {
@@ -129,17 +141,24 @@ const LoginButton = styled( Form.Button )`
 	:active .ui.button {
 		background: #b2698c;
 	};
+	:hover .ui.button {
+		background: #f4a3ca;
+		color: #fff;
+	}
 	.ui.button:focus {
 		background: #b2698c;
+		color: #262B30 !important;
 	}
 `;
 
 const CreateAccount = styled.span`
+	font-style: italic;
+	margin-top: 2em;
 	margin-bottom: 2em;
 	color: #fff;
 	font-size: 0.95rem;
 	@media (min-width: 1000px) {
-		color: #000;
+		color: #808080;
 	}
 `;
 
@@ -152,23 +171,51 @@ const Logo = styled( Image )`
 	@media (min-height: 1000px) {
 		top: 15%;
 	}
+	@media (min-width: 1000px) {
+		top: 30px;
+		left: 30px;
+		width: 65px;
+	}
 `;
 
 const FieldIcon = styled( Icon )`
 	position: absolute;
-	left: 40px;
+	left: 22.5px;
 	bottom: 13.25px;
 	color: #fff;
 	@media (min-width: 1000px) {
-		color: #000;
+		color: #262B30;
 	}
 `;
 
-const InputWrapper = styled.div`
-	position: relative;
-	width: 100%;
-	max-width: 272px !important;
+const FormHeader = styled.span`
+	visibility: hidden;
+	position: absolute;
+	bottom: 75%;
+	font-size: 27px;
+	font-weight: bold;
+	color: #262B30;
+	@media (min-width: 1000px) and (min-height: 575px) {
+		visibility: visible;
+	}
 `;
+
+const PinkText = styled.b`
+	color: #F490C0;
+`;
+
+const LogoText = styled.span`
+	visibility: hidden;
+	position: absolute;
+	top: 75px;
+	left: 100px;
+	color: #FFA733;
+	font-weight: bold;
+	@media (min-width: 1000px) and (min-height: 575px) {
+		visibility: visible;
+	}
+`;
+
 
 class LandingPage extends React.Component {
 	constructor() {
@@ -184,6 +231,8 @@ class LandingPage extends React.Component {
 					<BackgroundOverlay />
 					<FormWrapper>
 						<Logo src={require("../../images/piggy.png")} />
+						<LogoText>Start saving</LogoText>
+						<FormHeader>Sign In</FormHeader>
 						<LoginForm>
 							<InputWrapper>
 								<LoginInput placeholder="Username" />
@@ -193,12 +242,14 @@ class LandingPage extends React.Component {
 								<LoginInput placeholder="Password" type="password" />
 								<FieldIcon name="lock" />
 							</InputWrapper>
-							<LoginButton>Login</LoginButton>
-							<CreateAccount>Don't have an account? <b>Sign up</b></CreateAccount>
+							<LoginButton>Sign In</LoginButton>
+							<CreateAccount>
+								Don't have an account? <b>Sign up</b>
+							</CreateAccount>
 						</LoginForm>
 					</FormWrapper>
 					<TextWrapper>
-						<MainText>Welcome to <b>PiggyBank</b></MainText>
+						<MainText>Welcome to <PinkText>PiggyBank</PinkText></MainText>
 						<SecondaryText>Login to start managing your finances</SecondaryText>
 					</TextWrapper>
 				</LandingWrapper>
