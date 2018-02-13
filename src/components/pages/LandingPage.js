@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { login } from "../../actions/auth";
+import PropTypes from  "prop-types";
 import styled from "styled-components";
-import { Form, Image, Icon } from "semantic-ui-react";
+import { Form, Image, Icon, Message } from "semantic-ui-react";
 import background from "../../images/back3.jpeg";
 
 const LandingWrapper = styled.div`
@@ -165,7 +168,7 @@ const CreateAccount = styled.span`
 	margin-top: 2em;
 	margin-bottom: 2em;
 	color: #fff;
-	font-size: 0.95rem;
+	font-size: 1.1rem;
 	@media (min-width: 1000px) {
 		color: #808080;
 	}
@@ -228,30 +231,83 @@ const LogoText = styled.span`
 	}
 `;
 
+const ErrorMessage = styled( Message )`
+	background: none !important;
+	position: absolute;
+	box-shadow: none !important;
+	top: 60px;
+	margin: 50px 0px;
+	@media (max-height: 500px) {
+		top: 0px;
+	}
+`;
+
 
 class LandingPage extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-
+			username: "",
+			password: "",
+			dataErrors: false
 		};
 	}
+
+validateData = () => {
+	if ( this.state.username === "" || this.state.password === "") {
+		this.setState({ dataErrors: true });
+		return true;
+	}
+};
+
+// check and submit data to the backend
+	onSubmit = (e) => {
+		const errors = this.validateData();
+		if ( !errors ) {
+			this.props.login({ username: this.state.username, password: this.state.password })
+			.then( () =>
+				this.props.history.push("/home")
+			).catch( err =>
+				this.setState({ dataErrors: true })
+			);
+		}
+	};
+
+// set the state with the input name = to the input value
+	onChange = (e) => {
+		this.setState({ [ e.target.name ]: e.target.value });
+	};
+
 	render() {
 		return (
 				<LandingWrapper>
 					<BackgroundImage />
 					<BackgroundOverlay />
-					<FormWrapper>
+					<FormWrapper onSubmit={this.onSubmit}>
 						<Logo src={require("../../images/piggy.png")} />
 						<LogoText>Start saving</LogoText>
 						<FormHeader>Sign In</FormHeader>
-						<LoginForm>
+						<LoginForm error={this.state.dataErrors}>
+							<ErrorMessage
+								error
+								header="Invalid credentials"
+								content="Incorrect username or password"
+							/>
 							<InputWrapper>
-								<LoginInput placeholder="Username" />
+								<LoginInput
+									placeholder="Username"
+									name="username"
+									onChange={this.onChange}
+								/>
 								<FieldIcon name="user outline"/>
 							</InputWrapper>
 							<InputWrapper>
-								<LoginInput placeholder="Password" type="password" />
+								<LoginInput
+									placeholder="Password"
+									name="password"
+									type="password"
+									onChange={this.onChange}
+								/>
 								<FieldIcon name="lock" />
 							</InputWrapper>
 							<LoginButton>Sign In</LoginButton>
@@ -270,4 +326,11 @@ class LandingPage extends React.Component {
 	}
 }
 
-export default LandingPage;
+LandingPage.propTypes = {
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
+	login: PropTypes.func.isRequired
+};
+
+export default connect( null, { login })( LandingPage );
