@@ -1,9 +1,9 @@
 import React from "react";
-import { Route } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./components/pages/LandingPage";
 import HomePage from "./components/pages/HomePage";
 import UserRoute from "./components/routes/UserRoute";
+import GuestRoute from "./components/routes/GuestRoute";
 
 class App extends React.Component {
   constructor() {
@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
 
       <div className="App">
-				<Route
+				<GuestRoute
 					location={this.props.location}
 					path="/"
 					exact component={ LandingPage }

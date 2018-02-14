@@ -17,6 +17,6 @@ api.user.login( credentials ).then( token => {
 });
 
 export const logout = () => (dispatch) => {
-	localStorage.removeItem("token" );
+	localStorage.removeItem("token");
 	dispatch( userLoggedOut() );
 };
