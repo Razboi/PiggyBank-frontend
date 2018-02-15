@@ -24,7 +24,7 @@ const BackgroundImage = styled.div`
 	background-size: cover;
 	background-position: left;
 	@media (min-width: 1000px) {
-		width: 66.666%;
+		width: 100%;
 		right: 0px;
 	}
 `;
@@ -36,7 +36,7 @@ const BackgroundOverlay = styled.div`
 	height: 100%;
 	position: absolute !important;
 	@media (min-width: 1000px) {
-		width: 66.666%;
+		width: 100%;
 		right: 0px;
 		background-color: rgba(0, 0, 0, 0.55);
 	}
@@ -50,15 +50,24 @@ const FormWrapper = styled.div`
 	width: 100%;
 	position: absolute;
 	@media (min-width: 1000px) {
-		width: 33.333%;
-		left: 0px;
+		width: 430px;
 		background-color: #fff;
-	}
+		left: 5% !important;
+		z-index: 3;
+		height: 642px;
+	};
+	@media (min-width: 1000px) and (max-width: 1350px) {
+		width: 330px !important;
+	};
+	@media (min-width: 1500px) {
+		left: 10% !important;
+	};
 `;
 
 const LoginForm = styled( Form )`
 	z-index: 3;
-	align-self: center;
+	position: absolute !important;
+	bottom: 10%;
 	height: auto;
 	width: 100%;
 	display: flex;
@@ -71,6 +80,8 @@ const LoginForm = styled( Form )`
 	}
 	@media (max-height: 630px) {
 		height: 100%;
+		align-self: center;
+		bottom: 0px;
 	}
 `;
 
@@ -206,7 +217,7 @@ const FieldIcon = styled( Icon )`
 const FormHeader = styled.span`
 	visibility: hidden;
 	position: absolute;
-	bottom: 75%;
+	top: 15%;
 	font-size: 27px;
 	font-weight: bold;
 	color: #262B30;
@@ -226,6 +237,7 @@ const LogoText = styled.span`
 	left: 100px;
 	color: #FFA733;
 	font-weight: bold;
+	z-index: 3;
 	@media (min-width: 1000px) and (min-height: 575px) {
 		visibility: visible;
 	}
@@ -283,9 +295,9 @@ validateData = () => {
 				<LandingWrapper>
 					<BackgroundImage />
 					<BackgroundOverlay />
+					<Logo src={require("../../images/piggy.png")} />
+					<LogoText>Start saving</LogoText>
 					<FormWrapper onSubmit={this.onSubmit}>
-						<Logo src={require("../../images/piggy.png")} />
-						<LogoText>Start saving</LogoText>
 						<FormHeader>Sign In</FormHeader>
 						<LoginForm error={this.state.dataErrors}>
 							<ErrorMessage
