@@ -5,6 +5,7 @@ import { logout } from "../../actions/auth";
 import { Line } from "react-chartjs-2";
 import { Container, Table, Button } from "semantic-ui-react";
 import styled from "styled-components";
+import axios from "axios";
 
 const MainWrapper = styled( Container )`
 	width: 90% !important;
@@ -21,6 +22,18 @@ const TransactionsButton = styled( Button )`
 `;
 
 class HomePage extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			transactions: []
+		};
+	}
+	componentWillMount () {
+		axios.get("/api/balances/", { "headers": { "Authorization": "Token " + localStorage.token }
+	}).then( res => this.setState({ transactions: res.data }) )
+		.catch( err => console.log( err ) );
+	}
+
 	render() {
 		const dataChart = {
 			labels: [ "First", "Second", "Third", "Fourth" ],
@@ -40,7 +53,7 @@ class HomePage extends React.Component {
 				}
 			]
 		};
-		console.log( localStorage.getItem("token") );
+		console.log(this.state);
 		return (
 			<MainWrapper fluid={true}>
 				{ this.props.isAuthenticated &&
@@ -61,17 +74,19 @@ class HomePage extends React.Component {
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>
-							<Table.Row>
-								<Table.Cell>datedata</Table.Cell>
-								<Table.Cell>descriptiondata</Table.Cell>
-								<Table.Cell>amountdata</Table.Cell>
-								<Table.Cell>totalbalancedata</Table.Cell>
-							</Table.Row>
+							{this.state.transactions.map( transaction =>
+								<Table.Row>
+									<Table.Cell>{transaction.date}</Table.Cell>
+									<Table.Cell>{transaction.description}</Table.Cell>
+									<Table.Cell>{transaction.amount}</Table.Cell>
+									<Table.Cell>{transaction.balance}</Table.Cell>
+								</Table.Row>
+							)}
 						</Table.Body>
 						<Table.Footer>
 							<Table.Row>
 								<Table.HeaderCell colSpan="4">
-									<TransactionsButton primary>See all</TransactionsButton>
+									<TransactionsButton onClick={this.getTransactions} primary>See all</TransactionsButton>
 								</Table.HeaderCell>
 
 							</Table.Row>

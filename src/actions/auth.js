@@ -11,9 +11,9 @@ export const userLoggedOut = () => ({
 });
 
 export const login = (credentials) => (dispatch) =>
-api.user.login( credentials ).then( token => {
-	localStorage.setItem("token", token );
-	dispatch( userLoggedIn( token ) );
+api.user.login( credentials ).then( data => {
+	localStorage.setItem("token", data.token );
+	dispatch( userLoggedIn( data ) );
 });
 
 export const logout = () => (dispatch) => {
