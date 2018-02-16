@@ -55,6 +55,7 @@ const FormWrapper = styled.div`
 		left: 5% !important;
 		z-index: 3;
 		height: 642px;
+		box-shadow: 6px 6px 38px -9px rgba(38,43,48,1);
 	};
 	@media (min-width: 1000px) and (max-width: 1350px) {
 		width: 330px !important;
@@ -96,7 +97,7 @@ const TextWrapper = styled.div`
 	@media (min-width: 1000px) {
 		visibility: visible;
 		height: 100%;
-		width: 66.666%;
+		width: 70%;
 		right: 0px;
 	}
 `;
