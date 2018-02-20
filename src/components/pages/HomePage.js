@@ -36,24 +36,31 @@ class HomePage extends React.Component {
 
 	render() {
 		const dataChart = {
-			labels: [ "First", "Second", "Third", "Fourth" ],
+			labels:this.state.transactions.length > 0 && this.state.transactions.map(
+				transaction => transaction.date.split("T")[ 0 ] ),
 			datasets: [
 				{
 					label: "Balance",
-					data:[
-						130,
-						120,
-						300,
-						4000
-					],
+					data:this.state.transactions.length > 0 && this.state.transactions.map(
+						transaction => parseFloat( transaction.transaction_balance ) ),
 					borderColor: [
                 "#F490C0"
             ],
 					backgroundColor: [ "#F4A7C0" ]
 				}
 			]
+			};
+
+		const chartOptions = {
+			scales: {
+				yAxes: [ {
+					ticks: {
+						beginAtZero: true
+					}
+				} ]
+			}
 		};
-		console.log(this.state);
+
 		return (
 			<MainWrapper fluid={true}>
 				{ this.props.isAuthenticated &&
@@ -61,6 +68,7 @@ class HomePage extends React.Component {
 				}
 				<Line
 					data={dataChart}
+					options={chartOptions}
 					height={110}
 				/>
 				<Container>
@@ -74,12 +82,12 @@ class HomePage extends React.Component {
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>
-							{this.state.transactions.map( transaction =>
-								<Table.Row>
-									<Table.Cell>{transaction.date}</Table.Cell>
+							{this.state.transactions.map( (transaction, index) =>
+								<Table.Row key={index}>
+									<Table.Cell>{transaction.date.split("T")[ 0 ]}</Table.Cell>
 									<Table.Cell>{transaction.description}</Table.Cell>
 									<Table.Cell>{transaction.amount}</Table.Cell>
-									<Table.Cell>{transaction.balance}</Table.Cell>
+									<Table.Cell>{transaction.transaction_balance}</Table.Cell>
 								</Table.Row>
 							)}
 						</Table.Body>
