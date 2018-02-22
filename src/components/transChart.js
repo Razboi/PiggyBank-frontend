@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 class TransChart extends React.Component {
 	render() {
@@ -8,12 +8,10 @@ class TransChart extends React.Component {
 				transaction => transaction.date.split("T")[ 0 ] ),
 			datasets: [ {
 					label: "Balance",
+					borderColor: "#F490C0",
+					backgroundColor: "#F4A7C0",
 					data:this.props.transactions.length > 0 && this.props.transactions.map(
-						transaction => parseFloat( transaction.currentTotal ) ),
-					borderColor: [
-                "#F490C0"
-            ],
-					backgroundColor: [ "#F4A7C0" ]
+						transaction => parseFloat( transaction.currentTotal ) )
 				} ]
 			};
 
@@ -24,11 +22,11 @@ class TransChart extends React.Component {
 				} ]
 			}
 		};
+
 		return (
-			<Line
+			<Bar
 				data={dataChart}
 				options={chartOptions}
-				height={110}
 			/>
 		);
 	}

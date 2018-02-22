@@ -12,6 +12,10 @@ import TransTable from "../transTable";
 const MainWrapper = styled( Container )`
 	font-family: 'Ubuntu', sans-serif !important;
 	width: 90% !important;
+	margin: 0px !important;
+	@media (max-width: 600px) {
+		padding: 100px 0px;
+	}
 `;
 
 const CurrentBalance = styled.span`
@@ -20,7 +24,6 @@ const CurrentBalance = styled.span`
 	display: block;
 `;
 
-
 class HomePage extends React.Component {
 	constructor() {
 		super();
@@ -28,6 +31,7 @@ class HomePage extends React.Component {
 			transactions: [],
 			currentBalance: undefined
 		};
+		this.onWindowResize = this.onWindowResize.bind( this );
 	}
 	componentWillMount () {
 		axios.get("/api/balances/", { "headers": { "Authorization": "Token " + localStorage.token }
@@ -39,20 +43,42 @@ class HomePage extends React.Component {
 		} })
 		.then( res => this.setState({ currentBalance: res.data.totalBalance }) )
 		.catch( err => console.log( err ) );
+
+		this.onWindowResize();
+	}
+
+	componentDidMount() {
+		window.addEventListener("resize", this.onWindowResize );
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.onWindowResize );
+	}
+
+	onWindowResize() {
+		var smallDevice = window.screen.width < 768 ? true : false;
+		if ( smallDevice !== this.state.smallDevice ) {
+			this.setState({ smallDevice: smallDevice });
+		}
 	}
 
 	render() {
 		return (
 			<MainWrapper fluid={true}>
-				{ this.props.isAuthenticated &&
+				{/* { this.props.isAuthenticated &&
 					<span onClick={this.props.logout}>logout</span>
-				}
-				<TransChart transactions={this.state.transactions} />
+				} */}
+				<TransChart
+					transactions={this.state.transactions}
+					height={this.state.chartHeight}
+				/>
 				<CurrentBalance>
 					Current Balance: <b>{this.state.currentBalance} €</b>
 				</CurrentBalance>
 				<Container>
-					<TransTable transactions={this.state.transactions} />
+					<TransTable
+						smallDevice={this.state.smallDevice}
+						transactions={this.state.transactions} />
 				</Container>
 			</MainWrapper>
 		);
