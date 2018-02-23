@@ -9,19 +9,40 @@ import axios from "axios";
 import TransChart from "../transChart";
 import TransTable from "../transTable";
 
-const MainWrapper = styled( Container )`
+const MainWrapper = styled.div`
 	font-family: 'Ubuntu', sans-serif !important;
-	width: 90% !important;
-	margin: 0px !important;
+	width: 90%;
+	margin: 0px auto;
 	@media (max-width: 600px) {
-		padding: 100px 0px;
+		width: 100%;
 	}
 `;
 
 const CurrentBalance = styled.span`
-	margin: 70px auto;
+	color: #fff;
 	font-size: 25px;
-	display: block;
+	align-self: center;
+	@media (max-width: 600px) {
+		font-size: 22px;
+	}
+`;
+
+const TableContainer = styled( Container )`
+	margin: 0px !important;
+`;
+
+const Header = styled.header`
+	background: #8DEEA7;
+	padding: 70px 0px;
+	background: linear-gradient(#8DEEA7, #7ED495)
+`;
+
+const ChartWrapper = styled.div`
+	margin: 65px 0px;
+`;
+
+const Body = styled.div`
+
 `;
 
 class HomePage extends React.Component {
@@ -59,6 +80,7 @@ class HomePage extends React.Component {
 		var smallDevice = window.screen.width < 768 ? true : false;
 		if ( smallDevice !== this.state.smallDevice ) {
 			this.setState({ smallDevice: smallDevice });
+			console.log("updated");
 		}
 	}
 
@@ -68,18 +90,25 @@ class HomePage extends React.Component {
 				{/* { this.props.isAuthenticated &&
 					<span onClick={this.props.logout}>logout</span>
 				} */}
-				<TransChart
-					transactions={this.state.transactions}
-					height={this.state.chartHeight}
-				/>
-				<CurrentBalance>
-					Current Balance: <b>{this.state.currentBalance} €</b>
-				</CurrentBalance>
-				<Container>
-					<TransTable
-						smallDevice={this.state.smallDevice}
-						transactions={this.state.transactions} />
-				</Container>
+				<Header>
+					<CurrentBalance>
+						Current Balance: <b>{this.state.currentBalance} €</b>
+					</CurrentBalance>
+				</Header>
+				<Body>
+					<ChartWrapper>
+						<TransChart
+							transactions={this.state.transactions}
+							smallDevice={this.state.smallDevice}
+						/>
+					</ChartWrapper>
+
+					<TableContainer>
+						<TransTable
+							smallDevice={this.state.smallDevice}
+							transactions={this.state.transactions} />
+					</TableContainer>
+				</Body>
 			</MainWrapper>
 		);
 	}

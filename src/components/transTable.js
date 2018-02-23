@@ -3,25 +3,32 @@ import { Table, Button } from "semantic-ui-react";
 import styled from "styled-components";
 
 const TransactionsTable = styled( Table )`
-	margin-top: 80px !important;
+	border: none !important;
+	color: hsl(0, 0%, 25%) !important;
 `;
 
 const TransactionsButton = styled( Button )`
+	background: linear-gradient(#8DEEA7, #7ED495) !important;
 	display: block !important;
 	margin: 0px auto !important;
 	width: 200px;
 `;
 
 const TransHeader = styled( Table.Cell )`
+	color: hsl(0, 0%, 18%) !important;
 	display: block;
 	text-align: center !important;
-	font-weight: bold;
 	font-size: 18px;
 `;
 
 const Data = styled.span`
 	float: right;
 	display: inline-block;
+	color: hsl(0, 0%, 30%)
+`;
+
+const DataDate = styled( Data )`
+	color: hsl(0, 0%, 25%) !important;
 `;
 
 class TransTable extends React.Component {
@@ -40,7 +47,7 @@ class TransTable extends React.Component {
 							<Table.Row key={index}>
 								<Table.Cell>
 									<b>Date:</b>
-									<Data>{transaction.date.split("T")[ 0 ]}</Data>
+									<DataDate>{transaction.date.split("T")[ 0 ]}</DataDate>
 								</Table.Cell>
 								<Table.Cell>
 									<b>Description:</b>
