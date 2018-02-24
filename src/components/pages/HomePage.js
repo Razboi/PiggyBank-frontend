@@ -13,6 +13,7 @@ const MainWrapper = styled.div`
 	font-family: 'Ubuntu', sans-serif !important;
 	width: 90%;
 	margin: 0px auto;
+	background: #f6f6f6;
 	@media (max-width: 600px) {
 		width: 100%;
 	}
@@ -32,9 +33,9 @@ const TableContainer = styled( Container )`
 `;
 
 const Header = styled.header`
-	background: #8DEEA7;
-	padding: 70px 0px;
-	background: linear-gradient(#8DEEA7, #7ED495)
+	padding: 45px 0px;
+	background: linear-gradient(#8DEEA7, #7ED495, #71BF86);
+
 `;
 
 const ChartWrapper = styled.div`
