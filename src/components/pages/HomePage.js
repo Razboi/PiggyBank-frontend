@@ -8,6 +8,7 @@ import axios from "axios";
 
 import TransChart from "../transChart";
 import TransTable from "../transTable";
+import TransactionsForm from "../forms/transaction";
 
 const MainWrapper = styled.div`
 	font-family: 'Ubuntu', sans-serif !important;
@@ -43,7 +44,7 @@ const Body = styled.div`
 `;
 
 const ChartWrapper = styled.div`
-	padding: 65px 0px;
+	padding: 75px 0px;
 `;
 
 const AddButton = styled( Button )`
@@ -60,12 +61,14 @@ const AddButton = styled( Button )`
 
 const Logout = styled( Button )`
 	position: absolute;
-	top: 14px;
+	top: 16.5px;
 	left: 10px;
 	color: hsl(0,0%,30%) !important;
 	font-size: 1em;
 	margin: 0px !important;
-	background: #EBECED !important;
+	background: #fff !important;
+	color: #7ED495 !important;
+	border: 1px solid #7ED495 !important;
 `;
 
 
@@ -118,6 +121,16 @@ class HomePage extends React.Component {
 	showLess = () =>
 	this.setState({ allTransactions: [] });
 
+	createTransaction = (description, amount) => {
+		axios.post("/api/balances/create-transaction",
+		{
+			"description": description,
+			"amount": parseFloat( amount )
+		}
+	).then( res => console.log( res.data ) )
+		.catch( err => console.log( err ) );
+	};
+
 	render() {
 		return (
 			<MainWrapper fluid={true}>
@@ -152,8 +165,11 @@ class HomePage extends React.Component {
 
 				</Body>
 
-				<AddButton circular icon="add" />
 
+				<TransactionsForm
+					addTrans={this.createTransaction}
+					trigger={<AddButton circular icon="add" />}
+				/>
 
 			</MainWrapper>
 		);
