@@ -12,6 +12,7 @@ const TransactionsButton = styled( Button )`
 	display: block !important;
 	margin: 0px auto !important;
 	width: 200px;
+	color: #fff !important;
 `;
 
 const TransHeader = styled( Table.Cell )`
@@ -67,7 +68,15 @@ class TransTable extends React.Component {
 					<Table.Footer>
 						<Table.Row>
 							<Table.HeaderCell colSpan="4">
-								<TransactionsButton primary>See all</TransactionsButton>
+								{this.props.showingAll ?
+									<TransactionsButton onClick={this.props.showLess}>
+										See less
+									</TransactionsButton>
+								:
+								<TransactionsButton onClick={this.props.getAllTransactions}>
+									See all
+								</TransactionsButton>
+								}
 							</Table.HeaderCell>
 						</Table.Row>
 					</Table.Footer>
@@ -97,7 +106,15 @@ class TransTable extends React.Component {
 					<Table.Footer>
 						<Table.Row>
 							<Table.HeaderCell colSpan="4">
-								<TransactionsButton primary>See all</TransactionsButton>
+								{this.props.showingAll ?
+									<TransactionsButton onClick={this.props.showLess}>
+										See less
+									</TransactionsButton>
+								:
+								<TransactionsButton onClick={this.props.getAllTransactions}>
+									See all
+								</TransactionsButton>
+								}
 							</Table.HeaderCell>
 						</Table.Row>
 					</Table.Footer>

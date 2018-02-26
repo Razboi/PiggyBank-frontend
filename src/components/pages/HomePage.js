@@ -38,8 +38,12 @@ const Header = styled.header`
 	border-bottom: solid 1.5px #6AB27D;
 `;
 
+const Body = styled.div`
+	position: relative;
+`;
+
 const ChartWrapper = styled.div`
-	margin: 65px 0px;
+	padding: 65px 0px;
 `;
 
 const AddButton = styled( Button )`
@@ -54,12 +58,23 @@ const AddButton = styled( Button )`
 	}
 `;
 
+const Logout = styled( Button )`
+	position: absolute;
+	top: 14px;
+	left: 10px;
+	color: hsl(0,0%,30%) !important;
+	font-size: 1em;
+	margin: 0px !important;
+	background: #EBECED !important;
+`;
+
 
 class HomePage extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			transactions: [],
+			allTransactions: [],
 			currentBalance: undefined
 		};
 		this.onWindowResize = this.onWindowResize.bind( this );
@@ -90,25 +105,34 @@ class HomePage extends React.Component {
 		var smallDevice = window.screen.width < 768 ? true : false;
 		if ( smallDevice !== this.state.smallDevice ) {
 			this.setState({ smallDevice: smallDevice });
-			console.log("updated");
 		}
 	}
+
+	getAllTransactions = () => {
+		axios.get("/api/balances/all-transactions",
+		{ "headers": { "Authorization": "Token " + localStorage.token } })
+		.then( res => this.setState({ allTransactions: res.data }) )
+		.catch( err => console.log( err ) );
+	};
+
+	showLess = () =>
+	this.setState({ allTransactions: [] });
 
 	render() {
 		return (
 			<MainWrapper fluid={true}>
-				{/* { this.props.isAuthenticated &&
-					<span onClick={this.props.logout}>logout</span>
-				} */}
 				<Header>
 					<CurrentBalance>
 						Current Balance: <b>{this.state.currentBalance} €</b>
 					</CurrentBalance>
 				</Header>
-				<div>
+				<Body>
+					{ this.props.isAuthenticated &&
+						<Logout onClick={this.props.logout}>Logout</Logout>
+					}
 					<ChartWrapper>
 						<TransChart
-							transactions={this.state.transactions}
+							transactions={[ ...this.state.transactions ].reverse()}
 							smallDevice={this.state.smallDevice}
 						/>
 					</ChartWrapper>
@@ -116,10 +140,17 @@ class HomePage extends React.Component {
 					<TableContainer>
 						<TransTable
 							smallDevice={this.state.smallDevice}
-							transactions={this.state.transactions} />
+							showLess={this.showLess}
+							showingAll={this.state.allTransactions.length > 0 ? true : false}
+							getAllTransactions={this.getAllTransactions}
+							transactions={this.state.allTransactions.length > 0 ?
+								this.state.allTransactions
+							:
+								this.state.transactions
+							} />
 					</TableContainer>
 
-				</div>
+				</Body>
 
 				<AddButton circular icon="add" />
 

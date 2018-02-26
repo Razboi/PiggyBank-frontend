@@ -27,7 +27,6 @@ class TransChart extends React.Component {
 				display: false
 			}
 		};
-		console.log( this.props );
 		var chartHeight = this.props.smallDevice ? 200 : 120;
 		return (
 			<Bar
