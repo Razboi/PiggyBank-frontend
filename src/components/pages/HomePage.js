@@ -8,7 +8,7 @@ import axios from "axios";
 
 import TransChart from "../transChart";
 import TransTable from "../transTable";
-import TransactionsForm from "../forms/transaction";
+import CreateTransactionsForm from "../forms/createTransaction";
 
 const MainWrapper = styled.div`
 	font-family: 'Ubuntu', sans-serif !important;
@@ -166,7 +166,7 @@ class HomePage extends React.Component {
 				</Body>
 
 
-				<TransactionsForm
+				<CreateTransactionsForm
 					addTrans={this.createTransaction}
 					trigger={<AddButton circular icon="add" />}
 				/>

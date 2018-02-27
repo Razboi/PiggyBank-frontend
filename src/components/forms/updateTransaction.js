@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Form } from "semantic-ui-react";
 import styled from "styled-components";
+import axios from "axios";
 
 const SubmitButton = styled( Form.Button )`
 	.ui.button {
@@ -24,12 +25,13 @@ const FormHeader = styled( Modal.Header )`
 	text-align: center;
 `;
 
-class TransactionsForm extends React.Component {
-	constructor() {
-		super();
+class UpdateTransactionsForm extends React.Component {
+	constructor(props) {
+		super( props );
 		this.state = {
-			description: "",
-			amount: 0
+			description: props.description,
+			amount: props.amount,
+			pk: props.pk
 		};
 	}
 
@@ -37,18 +39,30 @@ class TransactionsForm extends React.Component {
 		this.setState({ [ e.target.name ]: e.target.value });
 
 	handleSubmit = () => {
-		this.props.addTrans( this.state.description, this.state.amount );
+		axios({
+			method: "put",
+			url: "api/balances/update-transaction",
+			headers: { Authorization: "Token " + localStorage.token },
+			data: {
+				pk: this.state.pk,
+				description: this.state.description,
+				amount: parseFloat( this.state.amount )
+			}
+		})
+		.then( res => console.log( res ) )
+		.catch( err => console.log( err ) );
 	};
 
 	render() {
 		return (
 			<Modal trigger={this.props.trigger}>
-				<FormHeader>Add a new transaction</FormHeader>
+				<FormHeader>Update the transaction</FormHeader>
 				<Modal.Content>
 					<Form onSubmit={this.handleSubmit}>
 						<Form.Field>
 							<StyledInput
 								name="description"
+								value={this.state.description}
 								onChange={this.handleChange}
 								placeholder="Description"
 							/>
@@ -57,12 +71,13 @@ class TransactionsForm extends React.Component {
 							<StyledInput
 								type="number"
 								name="amount"
+								value={this.state.amount}
 								onChange={this.handleChange}
 								placeholder="Amount"
 							/>
 						</Form.Field>
 						<SubmitButton>
-							Add
+							Update
 						</SubmitButton>
 					</Form>
 				</Modal.Content>
@@ -71,4 +86,4 @@ class TransactionsForm extends React.Component {
 	}
 };
 
-export default TransactionsForm;
+export default UpdateTransactionsForm;
