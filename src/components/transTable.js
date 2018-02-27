@@ -11,10 +11,14 @@ const TransactionsTable = styled( Table )`
 
 const TransactionsButton = styled( Button )`
 	background: linear-gradient(#8DEEA7, #7ED495) !important;
+	border-bottom: solid 1.5px #6AB27D !important;
 	display: block !important;
 	margin: 0px auto !important;
 	width: 200px;
 	color: #fff !important;
+	:active {
+		border-bottom: 0px !important;
+	}
 `;
 
 const TransHeader = styled( Table.Cell )`
@@ -61,6 +65,7 @@ class TransTable extends React.Component {
 							<Table.Row key={index}>
 								<Table.Cell>
 									<UpdateTransactionsForm
+										updateBalance={this.props.updateData}
 										trigger={<ChangeIcon circular icon="pencil" />}
 										amount={transaction.amount}
 										description={transaction.description}
@@ -121,9 +126,15 @@ class TransTable extends React.Component {
 								<Table.Cell>{transaction.description}</Table.Cell>
 								<Table.Cell>{transaction.amount}</Table.Cell>
 								<Table.Cell>{transaction.currentTotal}</Table.Cell>
-								<Table.Cell>
-									<ChangeIcon circular icon="pencil" />
-								</Table.Cell>
+
+								<UpdateTransactionsForm
+									updateBalance={this.props.updateData}
+									trigger={<ChangeIcon circular icon="pencil" />}
+									amount={transaction.amount}
+									description={transaction.description}
+									pk={transaction.pk}
+								/>
+
 							</Table.Row>
 						)}
 					</Table.Body>

@@ -42,7 +42,7 @@ class CreateTransactionsForm extends React.Component {
 
 	render() {
 		return (
-			<Modal trigger={this.props.trigger}>
+			<Modal trigger={this.props.trigger} size="mini">
 				<FormHeader>Add a new transaction</FormHeader>
 				<Modal.Content>
 					<Form onSubmit={this.handleSubmit}>

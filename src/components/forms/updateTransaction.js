@@ -9,9 +9,12 @@ const SubmitButton = styled( Form.Button )`
 			rgba(244, 167, 192, 0.96), rgba(244, 144, 192, 0.96)
 			) !important;
 		color: #fff !important;
-		display: block !important;
-		margin: auto !important;
 	}
+`;
+
+const ButtonsWrapper = styled.div`
+	display: flex;
+	justify-content: space-around;
 `;
 
 const StyledInput = styled.input`
@@ -49,13 +52,25 @@ class UpdateTransactionsForm extends React.Component {
 				amount: parseFloat( this.state.amount )
 			}
 		})
-		.then( res => console.log( res ) )
+		.then( res => this.props.updateBalance() )
+		.catch( err => console.log( err ) );
+	};
+
+	handleDelete = (e) => {
+		e.preventDefault();
+		axios({
+			method: "delete",
+			url: "api/balances/delete-transaction",
+			headers: { Authorization: "Token " + localStorage.token },
+			data:  { pk: this.state.pk }
+		})
+		.then( res => this.props.updateData() )
 		.catch( err => console.log( err ) );
 	};
 
 	render() {
 		return (
-			<Modal trigger={this.props.trigger}>
+			<Modal trigger={this.props.trigger} size="mini">
 				<FormHeader>Update the transaction</FormHeader>
 				<Modal.Content>
 					<Form onSubmit={this.handleSubmit}>
@@ -76,9 +91,14 @@ class UpdateTransactionsForm extends React.Component {
 								placeholder="Amount"
 							/>
 						</Form.Field>
-						<SubmitButton>
-							Update
-						</SubmitButton>
+						<ButtonsWrapper>
+							<Form.Button secondary onClick={this.handleDelete}>
+								Delete
+							</Form.Button>
+							<SubmitButton>
+								Update
+							</SubmitButton>
+						</ButtonsWrapper>
 					</Form>
 				</Modal.Content>
 			</Modal>
